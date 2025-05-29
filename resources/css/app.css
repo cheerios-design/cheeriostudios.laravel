@@ -1,0 +1,761 @@
+@import "tailwindcss";
+
+:root {
+    --font-heading: "Poiret One", sans-serif;
+    --font-paragraph: "Maven Pro", sans-serif;
+    --font-accent: "Sulphur Point", monospace;
+}
+
+/* Ensure proper fallbacks for fonts */
+@supports not (font-family: "Maven Pro") {
+    :root {
+        --font-paragraph: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    }
+}
+
+.font-heading {
+    font-family: var(--font-heading);
+    font-weight: 800;
+}
+
+.font-paragraph, .font-body {
+    font-family: var(--font-paragraph);
+    font-weight: 500;
+}
+
+.font-accent {
+    font-family: var(--font-accent);
+    font-weight: 600;
+}
+
+a:hover svg {
+    color: #f59e0b;
+    /* amber-400 */
+}
+
+
+.liquid-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.liquid-circle {
+    animation: moveAround 10s ease-in-out infinite;
+    filter: blur(15px);
+    /* Add blur effect */
+}
+
+.liquid-circle:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.liquid-circle:nth-child(2) {
+    animation-delay: 2.5s;
+}
+
+.liquid-circle:nth-child(3) {
+    animation-delay: 5s;
+}
+
+@keyframes moveAround {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(20px, -20px);
+    }
+
+    50% {
+        transform: translate(-20px, 20px);
+    }
+
+    75% {
+        transform: translate(20px, 20px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Floating effect keyframes */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Add the floating effect class */
+.float {
+    animation: float 2s ease-in-out infinite;
+}
+
+/* Active step styling */
+.step.active {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+    color: #4caf50;
+}
+
+/* Dashboard specific improvements */
+.dashboard-card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .dashboard-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .dashboard-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .dashboard-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+}
+
+/* Enhanced focus states for accessibility */
+.dashboard-card:focus-within {
+    outline: 2px solid rgb(245 158 11);
+    outline-offset: 2px;
+}
+
+/* Loading state for dashboard cards */
+.dashboard-card.loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+.dark .dashboard-card.loading {
+    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* Smooth text animations */
+.dashboard-card h3,
+.dashboard-card p {
+    transition: color 0.2s ease-in-out;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+    .font-heading {
+        font-size: 1.25rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Enhanced touch targets for mobile */
+    .dashboard-card {
+        min-height: 120px;
+        padding: 1.25rem;
+    }
+    
+    /* Better user menu positioning on mobile */
+    .user-menu {
+        position: fixed;
+        top: 4rem;
+        right: 1rem;
+        left: 1rem;
+        z-index: 9999;
+        margin-top: 0;
+    }
+    
+    /* Improved navigation spacing */
+    .nav-mobile {
+        padding: 0.75rem;
+    }
+}
+
+/* Ensure proper contrast in dark mode */
+.dark .bg-gray-50 {
+    background-color: rgb(17 24 39);
+}
+
+.dark .text-gray-900 {
+    color: rgb(243 244 246);
+}
+
+/* Fix for focus states */
+.focus-visible\:ring-amber-500:focus-visible {
+    --tw-ring-color: rgb(245 158 11);
+}
+
+/* Trust-building animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Animation classes */
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-slide-in-top {
+    animation: slideInFromTop 1s ease-out forwards;
+    opacity: 0;
+}
+
+.animate-pulse-trust {
+    animation: pulse 2s infinite;
+}
+
+/* Staggered animation delays */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+
+/* Professional hover effects */
+.trust-card {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.trust-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text effect */
+.gradient-text {
+    background: linear-gradient(135deg, #f59e0b, #f97316);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glowing effect for trust indicators */
+.glow-effect {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-effect:hover {
+    box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced trust-building effects */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.1); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.1); }
+    70% { transform: scale(1); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: 200px 0; }
+}
+
+@keyframes countUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Professional service card animations */
+.service-card-enhanced {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.service-card-enhanced:hover::before {
+    left: 100%;
+}
+
+/* Enhanced gradient text with animation */
+.gradient-text-animated {
+    background: linear-gradient(45deg, #f59e0b, #f97316, #f59e0b, #f97316);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Trust indicator enhancements */
+.trust-indicator {
+    position: relative;
+    display: inline-block;
+}
+
+.trust-indicator::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #f59e0b, #f97316);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.trust-indicator:hover::after {
+    transform: scaleX(1);
+}
+
+/* Enhanced button effects */
+.btn-enhanced {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+    z-index: -1;
+}
+
+.btn-enhanced:hover::before {
+    left: 100%;
+}
+
+/* Scroll reveal animations */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced focus states for accessibility */
+.focus-enhanced:focus {
+    outline: 2px solid #f59e0b;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+/* Counter animation styles */
+.counter-animate {
+    animation: countUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+/* Staggered reveal for project cards */
+.project-card {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.project-card:nth-child(odd) {
+    transition-delay: 0.1s;
+}
+
+.project-card:nth-child(even) {
+    transition-delay: 0.2s;
+}
+
+/* Staggered animation for dashboard cards */
+.dashboard-card:nth-child(1) {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.dashboard-card:nth-child(2) {
+    animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.dashboard-card:nth-child(3) {
+    animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.dashboard-card:nth-child(4) {
+    animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+.dashboard-card:nth-child(5) {
+    animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.dashboard-card:nth-child(6) {
+    animation: fadeInUp 0.6s ease-out 0.5s both;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .dashboard-card {
+        animation: none;
+        transition: none;
+    }
+    
+    .dashboard-card:hover {
+        transform: none;
+    }
+}
+
+/* Dashboard notification styles */
+.dashboard-notification {
+    border-left: 4px solid rgb(245 158 11);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    transition: all 0.3s ease;
+}
+
+.dashboard-notification:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.08) 100%);
+}
+
+.dark .dashboard-notification {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.1) 100%);
+}
+
+.dark .dashboard-notification:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(245, 158, 11, 0.15) 100%);
+}
+
+/* Status indicators */
+.status-active {
+    background-color: rgb(220 252 231);
+    color: rgb(22 163 74);
+}
+
+.dark .status-active {
+    background-color: rgb(22 163 74);
+    color: rgb(220 252 231);
+}
+
+.status-pending {
+    background-color: rgb(254 249 195);
+    color: rgb(161 98 7);
+}
+
+.dark .status-pending {
+    background-color: rgb(161 98 7);
+    color: rgb(254 249 195);
+}
+
+.status-inactive {
+    background-color: rgb(243 244 246);
+    color: rgb(31 41 55);
+}
+
+.dark .status-inactive {
+    background-color: rgb(31 41 55);
+    color: rgb(243 244 246);
+}
+
+/* Toast notification system */
+.toast-container {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 20rem;
+}
+
+.toast {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 1rem;
+    border-left: 4px solid rgb(245 158 11);
+    animation: slideInRight 0.3s ease-out;
+    transition: all 0.3s ease;
+}
+
+.toast.success {
+    border-left-color: rgb(34 197 94);
+}
+
+.toast.error {
+    border-left-color: rgb(239 68 68);
+}
+
+.toast.info {
+    border-left-color: rgb(59 130 246);
+}
+
+.dark .toast {
+    background: rgb(31 41 55);
+    color: rgb(243 244 246);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* Mobile toast adjustments */
+@media (max-width: 640px) {
+    .toast-container {
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+    }
+    
+    .toast {
+        margin: 0;
+    }
+}
+
+/* Enhanced accessibility and user experience */
+.dashboard-card, .trust-card, .service-card-enhanced {
+    /* Ensure good touch targets */
+    min-height: 44px;
+}
+
+/* Improved user menu dropdown */
+.user-menu {
+    z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.dark .user-menu {
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Better focus states for keyboard navigation */
+.dashboard-card:focus-visible,
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid rgb(245 158 11);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.1);
+}
+
+/* Service card enhancements */
+.service-card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card-hover:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .service-card-hover:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}
+
+/* Dashboard notification improvements */
+.dashboard-notification {
+    border-left: 4px solid rgb(245 158 11);
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(245, 158, 11, 0.05) 100%);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-notification::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.dashboard-notification:hover::before {
+    left: 100%;
+}
+
+/* Improved grid system */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
